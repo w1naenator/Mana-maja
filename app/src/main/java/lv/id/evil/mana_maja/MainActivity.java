@@ -9,16 +9,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import Moka7.*;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import Moka7.S7;
+import Moka7.S7Client;
 
 public class MainActivity extends AppCompatActivity {
     private static final S7Client Client = new S7Client();
+    EditText TxtHost = (EditText) findViewById(R.id.editText_host);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -33,7 +40,16 @@ public class MainActivity extends AppCompatActivity {
         final Button button = (Button) findViewById(R.id.button_connect);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                System.exit(0);
+                int result = 0;
+                String Host = TxtHost.getText().toString();
+                Client.SetConnectionType(S7.OP);
+                result = Client.ConnectTo(Host, 0, 2);
+                if(result == 0){
+                    Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
