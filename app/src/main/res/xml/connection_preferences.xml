@@ -1,0 +1,26 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/connection_settings">
+        <EditTextPreference
+            android:inputType="textEmailAddress"
+            android:key="host_address"
+            android:title="@string/host_address_title"
+            android:summary="@string/host_address_summary"
+            android:defaultValue="192.168.1.10" />
+        <EditTextPreference
+            android:inputType="number"
+            android:numeric="integer"
+            android:key="slot_number"
+            android:title="@string/slot_number_title"
+            android:summary="@string/slot_number_summary"
+            android:defaultValue="2"/>
+        <EditTextPreference
+            android:inputType="number"
+            android:numeric="integer"
+            android:key="rack_number"
+            android:title="@string/rack_number_title"
+            android:summary="@string/rack_number_summary"
+            android:defaultValue="0"/>
+    </PreferenceCategory>
+</PreferenceScreen>

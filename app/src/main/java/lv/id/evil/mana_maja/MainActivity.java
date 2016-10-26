@@ -1,6 +1,9 @@
 package lv.id.evil.mana_maja;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import Moka7.S7;
 import Moka7.S7Client;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,10 +24,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
         final ProgressBar wait_cursor = (ProgressBar) findViewById(R.id.wait_cursor);
         wait_cursor.setVisibility(View.INVISIBLE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //preferences
 
 
 
@@ -33,27 +40,16 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
-        final Button button = (Button) findViewById(R.id.button_connect);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
                 wait_cursor.setVisibility(View.VISIBLE);
                 PlcConnection p = new PlcConnection();
                 p.read = true;
                 new Thread(p).start();
-
-
-
             }
+
         });
     }
-
 
     private class PlcConnection implements Runnable{
         private final S7Client Client;
@@ -65,23 +61,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void run() {
-            String IpAddr = "192.168.1.10";
-            int LocTSAP = 0;
-            int RemTSAP = 0;
-            int selectedAreaRadio = 0;
-            int selectedArea = S7.S7AreaPE;
-            int dBNumber = 0;
-            int offset = 0;
-            int rack = 0;
-            int slot = 2;
+            final SharedPreferences ConnectionSettings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+            String IpAddr = ConnectionSettings.getString("host_address", null);
+            int rack = Integer.parseInt(ConnectionSettings.getString("rack_number", "0"));
+            int slot = Integer.parseInt(ConnectionSettings.getString("slot_number", "2"));
             boolean useTSAP = true;
             int res = 0;
             View view = (View) findViewById(R.id.root_view);
             ProgressBar wait_cursor = (ProgressBar) findViewById(R.id.wait_cursor);
             //collect connection data
             try {
-                EditText t = (EditText) findViewById(R.id.editText_host);
-                IpAddr = t.getText().toString();
+                //EditText t = (EditText) findViewById(R.id.editText_host);
+                //IpAddr = t.getText().toString();
+
+
+                //final SharedPreferences ConnectionPreferences = PreferredPreferences prefs = this.getSharedPreferences("general_settings", Context.MODE_PRIVATE);enceManager.getDefaultSharedPreferences(c);
+
 
                 //wait_cursor.setVisibility(VISIBLE);
                 Client.SetConnectionType(S7.OP);
@@ -127,8 +123,13 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_exit) {
-
             System.exit(0);
+            return true;
+        }
+
+        if (id == R.id.action_settings) {
+            Intent LaunchSettings = new Intent(MainActivity.this, PreferenceWithHeaders.class);
+            MainActivity.this.startActivity(LaunchSettings);
             return true;
         }
 

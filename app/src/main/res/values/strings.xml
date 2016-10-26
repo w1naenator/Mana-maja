@@ -4,4 +4,13 @@
     <string name="action_exit">Exit</string>
     <string name="text_hostorip" >Host or IP</string>
     <string name="butten_Connect" >Connect</string>
+    <string name="action_Settings">Settings</string>
+    <string name="settings_label">Settings</string>
+    <string name="connection_settings">Connection settings</string>
+    <string name="host_address_title">Host or IP address</string>
+    <string name="host_address_summary">Enter address of PLC.</string>
+    <string name="slot_number_title">Slot number</string>
+    <string name="slot_number_summary">Enter slot number</string>
+    <string name="rack_number_title">Rack number</string>
+    <string name="rack_number_summary">Enter rack number</string>
 </resources>

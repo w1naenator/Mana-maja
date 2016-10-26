@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<preference-headers
+xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<header android:fragment="com.example.android.apis.preference.PreferenceWithHeaders$Prefs1Fragment"
+    android:icon="@drawable/ic_settings_applications"
+    android:title="Prefs 1"
+    android:summary="An example of some preferences."
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+<header android:fragment="com.example.android.apis.preference.PreferenceWithHeaders$Prefs2Fragment"
+    android:icon="@drawable/ic_settings_display"
+    android:title="Prefs 2"
+    android:summary="Some other preferences you can see."
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- Arbitrary key/value pairs can be included with a header as
+         arguments to its fragment. -->
+    <extra android:name="someKey" android:value="someHeaderValue"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</header>
+
+<header android:icon="@drawable/ic_settings_display"
+    android:title="Intent"
+    android:summary="Launches an Intent."
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <intent android:action="android.intent.action.VIEW"
+        android:data="http://www.android.com"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</header>
+
+</preference-headers>
+</LinearLayout>
