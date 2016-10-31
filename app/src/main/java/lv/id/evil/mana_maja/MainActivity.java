@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        final ProgressBar wait_cursor = (ProgressBar) findViewById(R.id.wait_cursor);
-        wait_cursor.setVisibility(View.INVISIBLE);
+        //final ProgressBar wait_cursor = (ProgressBar) findViewById(R.id.wait_cursor);
+        //wait_cursor.setVisibility(View.INVISIBLE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Snackbar.make(view, "Connecting...", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
-                wait_cursor.setVisibility(View.VISIBLE);
+                //wait_cursor.setVisibility(View.VISIBLE);
                 PlcConnection p = new PlcConnection();
                 p.read = true;
                 new Thread(p).start();
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             boolean useTSAP = true;
             int res = 0;
             View view = (View) findViewById(R.id.root_view);
-            ProgressBar wait_cursor = (ProgressBar) findViewById(R.id.wait_cursor);
+            //ProgressBar wait_cursor = (ProgressBar) findViewById(R.id.wait_cursor);
             //collect connection data
             try {
                 //EditText t = (EditText) findViewById(R.id.editText_host);
