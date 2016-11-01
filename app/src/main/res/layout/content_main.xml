@@ -13,21 +13,32 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <ProgressBar
-        style="@android:style/Widget.Material.Light.ProgressBar.Large"
+    <TextView
+        android:text="@string/text_hall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/wait_cursor"
-        android:layout_below="@+id/button_connect"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="119dp"
-        tools:targetApi="lollipop" />
+        android:id="@+id/text_hall"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/toggle_hall1"
+        android:layout_toStartOf="@+id/toggle_hall1"
+        android:layout_alignBottom="@+id/toggle_hall1" />
 
     <ToggleButton
         android:text="ToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button_kitchen_group2"
+        android:id="@+id/toggle_kidsroom1"
+        android:layout_below="@+id/toggle_kitchen1"
+        android:layout_alignLeft="@+id/toggle_kitchen1"
+        android:layout_alignStart="@+id/toggle_kitchen1" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggle_hall1"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -36,33 +47,140 @@
         android:text="ToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button_kitchen_group1"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/button_kitchen_group2"
-        android:layout_toStartOf="@+id/button_kitchen_group2" />
+        android:id="@+id/toggle_kitchen1"
+        android:layout_below="@+id/toggle_hall1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
-        android:text="Kitchen"
+        android:text="@string/Kitchen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_kitchen"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/text_hall"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/button_kitchen_group1"
-        android:layout_toStartOf="@+id/button_kitchen_group1"
-        android:layout_alignBottom="@+id/button_kitchen_group1" />
+        android:layout_toLeftOf="@+id/toggle_hall1"
+        android:layout_toStartOf="@+id/toggle_hall1"
+        android:layout_above="@+id/toggle_kidsroom1" />
+
+    <TextView
+        android:text="Bath room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_bathroom"
+        android:layout_below="@+id/toggle_wc1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/toggle_bathroom1"
+        android:layout_toStartOf="@+id/toggle_bathroom1"
+        android:layout_above="@+id/seek_dimmer" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggle_guestroom1"
+        android:layout_below="@+id/toggle_kidsroom1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggle_bedroom1"
+        android:layout_below="@+id/toggle_guestroom1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggle_bathroom1"
+        android:layout_below="@+id/toggle_wc1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seek_dimmer"
+        android:layout_below="@+id/toggle_bathroom1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:max="100" />
+
+    <TextView
+        android:text="Kids room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_kidsroom"
+        android:layout_below="@+id/text_kitchen"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/toggle_kidsroom1"
+        android:layout_toStartOf="@+id/toggle_kidsroom1"
+        android:layout_above="@+id/toggle_guestroom1" />
+
+    <TextView
+        android:text="Guest room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_guestroom"
+        android:layout_below="@+id/text_kidsroom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/toggle_kidsroom1"
+        android:layout_toStartOf="@+id/toggle_kidsroom1"
+        android:layout_above="@+id/toggle_bedroom1" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggle_wc1"
+        android:layout_below="@+id/toggle_bedroom1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="WC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_WC"
+        android:layout_alignBottom="@+id/toggle_wc1"
+        android:layout_below="@+id/text_bedroom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/toggle_bedroom1"
+        android:layout_toStartOf="@+id/toggle_bedroom1" />
+
+    <TextView
+        android:text="Bedroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_bedroom"
+        android:layout_below="@+id/text_guestroom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/toggle_guestroom1"
+        android:layout_toStartOf="@+id/toggle_guestroom1"
+        android:layout_above="@+id/toggle_wc1" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:text=""
         android:ems="10"
-        android:layout_centerVertical="true"
+        android:id="@+id/editTextDebug"
+        android:hint="Debug console"
+        android:layout_below="@+id/seek_dimmer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/editTextDebug"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

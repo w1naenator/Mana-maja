@@ -3,8 +3,7 @@ package lv.id.evil.mana_maja;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,11 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import Moka7.S7;
 import Moka7.S7Client;
 
 
@@ -31,52 +29,198 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final PlcConnection PLC_Conn = new PlcConnection("evil.id.lv", 0, 2);
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
 
-        final SharedPreferences ConnectionSettings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        final String IpAddr = ConnectionSettings.getString("host_address", null);
-        final int rack = Integer.parseInt(ConnectionSettings.getString("rack_number", "0"));
-        final int slot = Integer.parseInt(ConnectionSettings.getString("slot_number", "2"));
+        }
+
+
         final boolean useTSAP = false;
+        final PlcConnection PLC_Conn = new PlcConnection();
 
         //final ProgressBar wait_cursor = (ProgressBar) findViewById(R.id.wait_cursor);
         //wait_cursor.setVisibility(View.INVISIBLE);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final int i = 0;
+        final ToggleButton toggle_hall1 = (ToggleButton) findViewById(R.id.toggle_hall1);
+        final ToggleButton toggle_kitchen1 = (ToggleButton) findViewById(R.id.toggle_kitchen1);
+        final ToggleButton toggle_kidsroom1 = (ToggleButton) findViewById(R.id.toggle_kidsroom1);
+        final ToggleButton toggle_guestroom1 = (ToggleButton) findViewById(R.id.toggle_guestroom1);
+        final ToggleButton toggle_bedroom1 = (ToggleButton) findViewById(R.id.toggle_bedroom1);
+        final ToggleButton toggle_wc1 = (ToggleButton) findViewById(R.id.toggle_wc1);
+        final ToggleButton toggle_bathroom1 = (ToggleButton) findViewById(R.id.toggle_bathroom1);
+        final SeekBar seek_dimmer=(SeekBar) findViewById(R.id.seek_dimmer);
 
-
-        final ToggleButton bt_kitchen_group1 = (ToggleButton) findViewById(R.id.button_kitchen_group1);
         final EditText editTextDebug = (EditText) findViewById(R.id.editTextDebug);
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         final ViewGroup root_view = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
 
+        final int HALL1 = 832,
+                  KITCHEN1 = 820,
+                  KIDSROOM1 = 844,
+                  GUESTROOM1 = 850,
+                  BEDROOM1 = 950,
+                  WC1 = 838,
+                  BATHROOM1 = 826,
+                  DIMMER = 944;
+
 
 //================================listeners==========================
 
-        bt_kitchen_group1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        toggle_hall1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Snackbar.make(buttonView, "Kitchen light group 1 is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                } else {
-                    Snackbar.make(buttonView, "Kitchen light group 1 is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                if (PLC_Conn.isConnected){
+                    PLC_Conn.Write(HALL1, isChecked);
+                    if (PLC_Conn.Status == 0){
+                        if (isChecked) {
+                            Snackbar.make(buttonView, "Hall light group 1 is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        } else {
+                            Snackbar.make(buttonView, "Hall light group 1 is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        }
+                    }
+                }
+            }
+        });
+
+        toggle_kitchen1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (PLC_Conn.isConnected){
+                    PLC_Conn.Write(KITCHEN1, isChecked);
+                    if (PLC_Conn.Status == 0){
+                        if (isChecked) {
+                            Snackbar.make(buttonView, "Kitchen light group 1 is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        } else {
+                            Snackbar.make(buttonView, "Kitchen light group 1 is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        }
+                    }
                 }
             }
         });
 
 
+        toggle_kidsroom1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (PLC_Conn.isConnected){
+                    PLC_Conn.Write(KIDSROOM1, isChecked);
+                    if (PLC_Conn.Status == 0){
+                        if (isChecked) {
+                            Snackbar.make(buttonView, "Kids room light group 1 is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        } else {
+                            Snackbar.make(buttonView, "Kids room light group 1 is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        }
+                    }
+                }
+            }
+        });
+
+
+        toggle_guestroom1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (PLC_Conn.isConnected){
+                    PLC_Conn.Write(GUESTROOM1, isChecked);
+                    if (PLC_Conn.Status == 0){
+                        if (isChecked) {
+                            Snackbar.make(buttonView, "Guest room light group 1 is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        } else {
+                            Snackbar.make(buttonView, "Guest room light group 1 is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        }
+                    }
+                }
+            }
+        });
+
+        toggle_bedroom1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (PLC_Conn.isConnected){
+                    PLC_Conn.Write(BEDROOM1, isChecked);
+                    if (PLC_Conn.Status == 0){
+                        if (isChecked) {
+                            Snackbar.make(buttonView, "Bedroom light group 1 is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        } else {
+                            Snackbar.make(buttonView, "Bedroom light group 1 is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        }
+                    }
+                }
+            }
+        });
+
+        toggle_wc1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (PLC_Conn.isConnected){
+                    PLC_Conn.Write(WC1, isChecked);
+                    if (PLC_Conn.Status == 0){
+                        if (isChecked) {
+                            Snackbar.make(buttonView, "WC light is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        } else {
+                            Snackbar.make(buttonView, "WC light is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        }
+                    }
+                }
+            }
+        });
+
+        toggle_bathroom1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (PLC_Conn.isConnected){
+                    PLC_Conn.Write(BATHROOM1, isChecked);
+                    if (PLC_Conn.Status == 0){
+                        if (isChecked) {
+                            Snackbar.make(buttonView, "Bathroom light is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        } else {
+                            Snackbar.make(buttonView, "Bathroom light is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        }
+                    }
+                }
+            }
+        });
+
+        seek_dimmer.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                // TODO Auto-generated method stub
+
+
+            }
+        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Connecting...", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                final SharedPreferences ConnectionSettings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                final String host_address = ConnectionSettings.getString("host_address", null);
+                final int rack_number = Integer.parseInt(ConnectionSettings.getString("rack_number", "0"));
+                final int slot_number = Integer.parseInt(ConnectionSettings.getString("slot_number", "2"));
 
-                //wait_cursor.setVisibility(View.VISIBLE);
 
-                PLC_Conn.Connect();
-                String Test = Integer.toString(PLC_Conn.Status);
-                editTextDebug.setText(Test, TextView.BufferType.EDITABLE);
 
+                PLC_Conn.Connect(host_address, rack_number, slot_number);
+                if (PLC_Conn.Status < 0) {
+                    String Test = Integer.toString(PLC_Conn.Status);
+                    editTextDebug.setText(Test, TextView.BufferType.EDITABLE);
+                }else if(PLC_Conn.Status == 0){
+                    Snackbar.make(view, "Connection successful! "+ String.valueOf(PLC_Conn.isConnected), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    editTextDebug.setText("", TextView.BufferType.EDITABLE);
+                }else{
+                    editTextDebug.setText(S7Client.ErrorText(PLC_Conn.Status)+", "+PLC_Conn.Host, TextView.BufferType.EDITABLE);
+                }
             }
 
         });
@@ -84,12 +228,45 @@ public class MainActivity extends AppCompatActivity {
 
         //===========================cyclic operations============================
         Runnable uiUpdater = new Runnable() {
-            @Override
+            //@Override
+            int i = 0;
             public void run() {
-                Snackbar.make(root_view, "exec", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                boolean state = false;
+                i++;
+                //editTextDebug.setText(String.valueOf(i) + ", isConnected = " + String.valueOf(PLC_Conn.isConnected), TextView.BufferType.EDITABLE);
+                if(PLC_Conn.isConnected == true) {
+                    state = PLC_Conn.Read(HALL1);
+                    if(PLC_Conn.Status == 0) {
+                        toggle_hall1.setChecked(state);
+                    }
+                    state = PLC_Conn.Read(KITCHEN1);
+                    if(PLC_Conn.Status == 0) {
+                        toggle_kitchen1.setChecked(state);
+                    }
+                    state = PLC_Conn.Read(KIDSROOM1);
+                    if(PLC_Conn.Status == 0) {
+                        toggle_kidsroom1.setChecked(state);
+                    }
+                    state = PLC_Conn.Read(GUESTROOM1);
+                    if(PLC_Conn.Status == 0) {
+                        toggle_guestroom1.setChecked(state);
+                    }
+                    state = PLC_Conn.Read(BEDROOM1);
+                    if(PLC_Conn.Status == 0) {
+                        toggle_bedroom1.setChecked(state);
+                    }
+                    state = PLC_Conn.Read(WC1);
+                    if(PLC_Conn.Status == 0) {
+                        toggle_wc1.setChecked(state);
+                    }
+                    state = PLC_Conn.Read(BATHROOM1);
+                    if(PLC_Conn.Status == 0) {
+                        toggle_bathroom1.setChecked(state);
+                    }
+                }
             }
         };
-        CyclicUpdate updater = new CyclicUpdate(uiUpdater, 10000);
+        CyclicUpdate updater = new CyclicUpdate(uiUpdater, 3000);
         //CyclicUpdate(uiUpdater);
 
         updater.startUpdates();

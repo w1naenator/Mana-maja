@@ -11,7 +11,7 @@ public class CyclicUpdate {
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
     private Runnable mStatusChecker;
-    private int UPDATE_INTERVAL = 2000;
+    private int UPDATE_INTERVAL = 1000;
 
     /**
      * Creates an UIUpdater object, that can be used to
@@ -56,6 +56,7 @@ public class CyclicUpdate {
      * adds the callback to the handler).
      */
     public synchronized void startUpdates(){
+
         mStatusChecker.run();
     }
 
@@ -64,6 +65,7 @@ public class CyclicUpdate {
      * by removing the callback.
      */
     public synchronized void stopUpdates(){
+
         mHandler.removeCallbacks(mStatusChecker);
     }
 }

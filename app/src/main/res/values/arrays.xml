@@ -3,4 +3,12 @@
     <string-array name="entries_list_preference">entries_list_preference</string-array>
     <string-array name="entryvalues_list_preference">entryvalues_list_preference</string-array>
     <string-array name="dialog_title_list_preference">dialog_title_list_preference</string-array>
+    <string-array name="connection_type_name">
+        <item>"Rack/Slot"</item>
+        <item>"TSAP"</item>
+    </string-array>
+    <string-array name="connection_type_value">
+        <item>"0"</item>
+        <item>"1"</item>
+    </string-array>
 </resources>

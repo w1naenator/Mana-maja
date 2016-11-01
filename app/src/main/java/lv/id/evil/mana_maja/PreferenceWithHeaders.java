@@ -1,10 +1,12 @@
 package lv.id.evil.mana_maja;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -13,6 +15,11 @@ import java.util.List;
 
 
 public class PreferenceWithHeaders extends PreferenceActivity {
+
+    SharedPreferences.OnSharedPreferenceChangeListener listener;
+
+
+
     private static List<String> fragments = new ArrayList<String>();
 
 
@@ -21,6 +28,31 @@ public class PreferenceWithHeaders extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final View view = findViewById(android.R.id.content);
+        //Snackbar.make(view, "Preference is changed!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+
+            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+
+                //EditTextPreference pref = (EditTextPreference) findPreference("rack_number");
+                //PreferenceCategory cat = (PreferenceCategory) findPreference("connection");
+                //cat.removePreference(pref);
+
+                }
+
+            //}
+        };
+        prefs.registerOnSharedPreferenceChangeListener(listener);
+
+
+
+
+
+
+
 
         // Add a button to the header list.
         if (hasHeaders()) {

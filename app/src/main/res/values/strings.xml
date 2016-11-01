@@ -13,4 +13,8 @@
     <string name="slot_number_summary">Enter slot number</string>
     <string name="rack_number_title">Rack number</string>
     <string name="rack_number_summary">Enter rack number</string>
+    <string name="connection_type_title">Connection type</string>
+    <string name="connection_type_summary">Select type of connection to PLC.</string>
+    <string name="Kitchen">Kitchen</string>
+    <string name="text_hall">Hall</string>
 </resources>
