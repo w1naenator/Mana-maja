@@ -2,24 +2,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <header android:fragment="lv.id.evil.mana_maja.PreferenceWithHeaders$Prefs1Fragment"
-        android:icon="@drawable/ic_connection_settings"
+        android:icon="@drawable/ic_action_connection_settings"
         android:title="Connection settings"
         android:summary="TCP settings of PLC." />
 
     <header android:fragment="lv.id.evil.mana_maja.PreferenceWithHeaders$Prefs2Fragment"
-        android:icon="@drawable/ic_settings_display"
-        android:title="Prefs 2"
+        android:icon="@drawable/ic_action_connection_settings"
+        android:title="System settings"
         android:summary="Some other preferences you can see.">
         <!-- Arbitrary key/value pairs can be included with a header as
              arguments to its fragment. -->
         <extra android:name="someKey" android:value="someHeaderValue" />
     </header>
 
-    <header android:icon="@drawable/ic_settings_display"
-        android:title="Intent"
-        android:summary="Launches an Intent.">
+    <header android:icon="@drawable/ic_action_www"
+        android:title="Developer's homepage"
+        android:summary="www.evil.i.lv">
         <intent android:action="android.intent.action.VIEW"
-            android:data="http://www.android.com" />
+            android:data="http://www.evil.id.lv" />
     </header>
 
 </preference-headers>

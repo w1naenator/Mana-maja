@@ -82,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
                     PLC_Conn.Write(HALL1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
-                            Snackbar.make(buttonView, "Hall light group 1 is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_hall_light_group1_is_switched_on, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         } else {
-                            Snackbar.make(buttonView, "Hall light group 1 is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_hall_light_group1_is_switched_off, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         }
                     }
                 }
@@ -97,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
                     PLC_Conn.Write(KITCHEN1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
-                            Snackbar.make(buttonView, "Kitchen light group 1 is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_kitchen_light_group1_is_switched_on, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         } else {
-                            Snackbar.make(buttonView, "Kitchen light group 1 is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_kitchen_light_group1_is_switched_off, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         }
                     }
                 }
@@ -113,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
                     PLC_Conn.Write(KIDSROOM1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
-                            Snackbar.make(buttonView, "Kids room light group 1 is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_kids_room_light_group1_is_switched_on, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         } else {
-                            Snackbar.make(buttonView, "Kids room light group 1 is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_kids_room_light_group_1_is_switched_off, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         }
                     }
                 }
@@ -129,9 +129,9 @@ public class MainActivity extends AppCompatActivity {
                     PLC_Conn.Write(GUESTROOM1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
-                            Snackbar.make(buttonView, "Guest room light group 1 is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_guest_room_light_group1_is_switched_on, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         } else {
-                            Snackbar.make(buttonView, "Guest room light group 1 is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_guest_room_light_group1_is_switched_off, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         }
                     }
                 }
@@ -144,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
                     PLC_Conn.Write(BEDROOM1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
-                            Snackbar.make(buttonView, "Bedroom light group 1 is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_bedroom_light_group1_is_switched_on, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         } else {
-                            Snackbar.make(buttonView, "Bedroom light group 1 is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_bedroom_light_group1_is_switched_off, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         }
                     }
                 }
@@ -159,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
                     PLC_Conn.Write(WC1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
-                            Snackbar.make(buttonView, "WC light is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_wc_light_is_switched_on, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         } else {
-                            Snackbar.make(buttonView, "WC light is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_wc_light_is_switched_off, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         }
                     }
                 }
@@ -174,9 +174,9 @@ public class MainActivity extends AppCompatActivity {
                     PLC_Conn.Write(BATHROOM1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
-                            Snackbar.make(buttonView, "Bathroom light is switched on", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_bathroom_light_is_switched_on, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         } else {
-                            Snackbar.make(buttonView, "Bathroom light is switched off", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            Snackbar.make(buttonView, R.string.fab_bathroom_light_is_switched_off, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         }
                     }
                 }
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (PLC_Conn.isConnected == false) {
 
-                    Snackbar.make(view, "Connecting...", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    Snackbar.make(view, R.string.fab_connecting, Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
                     final SharedPreferences ConnectionSettings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                     final String host_address = ConnectionSettings.getString("host_address", null);
@@ -222,20 +222,20 @@ public class MainActivity extends AppCompatActivity {
                     PLC_Conn.Connect(host_address, rack_number, slot_number);
 
                     if (PLC_Conn.Status < 0) {
-                        Snackbar.make(view, "System error!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        Snackbar.make(view, R.string.fab_system_error, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     }
                     else if (PLC_Conn.Status == 0) {
-                        Snackbar.make(view, "Connection successful!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        Snackbar.make(view, R.string.fab_connection_successful, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     }
                     else {
-                        Snackbar.make(view, "Connection failed! (e"+PLC_Conn.Status+")", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        Snackbar.make(view, getString(R.string.fab_connection_failed)+" (e "+PLC_Conn.Status+")", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     }
                 }
                 else {
                     //editTextDebug.setText("Disconnecting");
                     PLC_Conn.Disconnect();
                     if (PLC_Conn.Status == 0) {
-                        Snackbar.make(view, "Disconnected!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        Snackbar.make(view, R.string.fab_disconnected, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     }
                 }
             }
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
                     seek_dimmer.setProgress(PLC_Conn.ReadInt(DIMMER));
                     TextView_Dimmer.setText(String.valueOf(seek_dimmer.getProgress()));
 
-                    fab.setImageResource(R.drawable.ic_connect);
+                    fab.setImageResource(R.drawable.ic_action_disconnect);
                     fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ff3399")));
                     toggle_hall1.setEnabled(true);
                     toggle_kitchen1.setEnabled(true);
@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
                     seek_dimmer.setEnabled(true);
                 }
                 else{
-                    fab.setImageResource(R.drawable.ic_disconnect);
+                    fab.setImageResource(R.drawable.ic_action_connect);
                     fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00ff99")));
                     toggle_hall1.setEnabled(false);
                     toggle_kitchen1.setEnabled(false);

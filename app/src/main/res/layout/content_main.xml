@@ -13,7 +13,7 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
     <TextView
-        android:text="@string/text_hall"
+        android:text="@string/button_hall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_hall"
@@ -55,7 +55,7 @@
         android:enabled="false" />
 
     <TextView
-        android:text="@string/Kitchen"
+        android:text="@string/button_kitchen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_kitchen"
@@ -67,7 +67,7 @@
         android:layout_above="@+id/toggle_kidsroom1" />
 
     <TextView
-        android:text="Bath room"
+        android:text="@string/bath_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_bathroom"
@@ -109,7 +109,7 @@
         android:enabled="false" />
 
     <TextView
-        android:text="Kids room"
+        android:text="@string/kids_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_kidsroom"
@@ -121,7 +121,7 @@
         android:layout_above="@+id/toggle_guestroom1" />
 
     <TextView
-        android:text="Guest room"
+        android:text="@string/guest_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_guestroom"
@@ -143,7 +143,7 @@
         android:enabled="false" />
 
     <TextView
-        android:text="WC"
+        android:text="@string/text_wc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_WC"
@@ -155,7 +155,7 @@
         android:layout_toStartOf="@+id/toggle_bedroom1" />
 
     <TextView
-        android:text="Bedroom"
+        android:text="@string/text_bedroom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_bedroom"

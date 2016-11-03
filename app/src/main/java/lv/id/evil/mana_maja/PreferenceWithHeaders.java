@@ -115,7 +115,7 @@ public class PreferenceWithHeaders extends PreferenceActivity {
             Log.i("args", "Arguments: " + getArguments());
 
             // Load the preferences from an XML resource
-            addPreferencesFromResource(R.xml.fragmented_preferences_inner);
+            addPreferencesFromResource(R.xml.connection_preferences);
         }
     }
 

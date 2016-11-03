@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mana māja</string>
+    <string name="action_Settings">Iestatījumi</string>
+    <string name="action_exit">Iziet</string>
+    <string name="butten_Connect">Piestēgties</string>
+    <string name="action_settings">Iestatījumi</string>
+    <string name="button_hall">Gaitenis</string>
+    <string name="button_kitchen">Virtuve</string>
+    <string name="connection_settings">Pieslēguma iestatījumi</string>
+    <string name="connection_type_summary">Izvēlieties PLK pieslēguma veidu.</string>
+    <string name="connection_type_title">Pieslēguma veids</string>
+    <string name="fab_bathroom_light_is_switched_off">Atslēgta gaisma vannas istabā</string>
+    <string name="fab_bathroom_light_is_switched_on">Ieslēgta gaisma vannas istabā</string>
+    <string name="fab_bedroom_light_group1_is_switched_off">Atslēgta gaismas 1. grupa guļamistabā</string>
+    <string name="fab_bedroom_light_group1_is_switched_on">Ieslēgta gaismas 1. grupa guļamistabā</string>
+    <string name="fab_connecting">Pieslēdzas...</string>
+    <string name="fab_connection_failed">Pieslēgties neizdevās!</string>
+    <string name="fab_connection_successful">Veiksmīgs pieslēgums!</string>
+    <string name="fab_disconnected">Atslēdzās!</string>
+    <string name="fab_guest_room_light_group1_is_switched_off">Atslēgta gaismas 1. grupa viesistabā</string>
+    <string name="fab_guest_room_light_group1_is_switched_on">Ieslēgta gaismas 1. grupa viesistabā</string>
+    <string name="fab_hall_light_group1_is_switched_off">Atslēgta gaismas 1. grupa gaitenī</string>
+    <string name="fab_hall_light_group1_is_switched_on">Ieslēgta gaismas 1. grupa gaitenī</string>
+    <string name="fab_kids_room_light_group_1_is_switched_off">Atslēgta gaismas 1. grupa bērnu istabā</string>
+    <string name="fab_kids_room_light_group1_is_switched_on">Ieslēgta gaismas 1. grupa bērnu istabā</string>
+    <string name="fab_kitchen_light_group1_is_switched_off">Atslēgta gaismas 1. grupa bērnu virtuvē</string>
+    <string name="fab_kitchen_light_group1_is_switched_on">Ieslēgta gaismas 1. grupa bērnu virtuvē</string>
+    <string name="fab_system_error">Sistēmas kļūda</string>
+    <string name="fab_wc_light_is_switched_off">Atslēgta gaisma tuatetē</string>
+    <string name="fab_wc_light_is_switched_on">Ieslēgta gaisma tualetē</string>
+    <string name="host_address_summary">Ievadiet PKL adresi</string>
+    <string name="host_address_title">Hosts vai IP adrese</string>
+    <string name="rack_number_summary">Norādiet sliedes numuru</string>
+    <string name="rack_number_title">Sliedes numurs</string>
+    <string name="settings_label">Siestatījumi</string>
+    <string name="slot_number_summary">Norādiet ligzdas numuru</string>
+    <string name="slot_number_title">Ligzdas numurs</string>
+    <string name="text_host_or_ip">Hosts vai IP</string>
+    <string name="text_wc">Tualete</string>
+    <string name="guest_room">Viesistaba</string>
+    <string name="kids_room">Bērnu istaba</string>
+    <string name="text_bedroom">Guļamistaba</string>
+    <string name="bath_room">Vannas istaba</string>
+</resources>
