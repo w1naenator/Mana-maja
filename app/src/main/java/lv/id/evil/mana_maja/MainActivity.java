@@ -2,6 +2,8 @@ package lv.id.evil.mana_maja;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
@@ -14,12 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
-import Moka7.S7Client;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final int i = 0;
+        //final int i = 0;
+        final int dimmer;
         final ToggleButton toggle_hall1 = (ToggleButton) findViewById(R.id.toggle_hall1);
         final ToggleButton toggle_kitchen1 = (ToggleButton) findViewById(R.id.toggle_kitchen1);
         final ToggleButton toggle_kidsroom1 = (ToggleButton) findViewById(R.id.toggle_kidsroom1);
@@ -56,8 +56,11 @@ public class MainActivity extends AppCompatActivity {
         final ToggleButton toggle_wc1 = (ToggleButton) findViewById(R.id.toggle_wc1);
         final ToggleButton toggle_bathroom1 = (ToggleButton) findViewById(R.id.toggle_bathroom1);
         final SeekBar seek_dimmer=(SeekBar) findViewById(R.id.seek_dimmer);
-
-        final EditText editTextDebug = (EditText) findViewById(R.id.editTextDebug);
+        final SharedPreferences ConnectionSettings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        final String host_address = ConnectionSettings.getString("host_address", null);
+        final int rack_number = Integer.parseInt(ConnectionSettings.getString("rack_number", "0"));
+        final int slot_number = Integer.parseInt(ConnectionSettings.getString("slot_number", "2"));
+        final TextView TextView_Dimmer = (TextView) findViewById(R.id.TextView_Dimmer);
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         final ViewGroup root_view = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
 
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                   BATHROOM1 = 826,
                   DIMMER = 944;
 
-
+        //PLC_Conn.Connect(host_address, rack_number, slot_number);
 //================================listeners==========================
 
         toggle_hall1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -185,44 +188,57 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 // TODO Auto-generated method stub
+
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 // TODO Auto-generated method stub
+
             }
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                 // TODO Auto-generated method stub
-
-
+                TextView_Dimmer.setText(String.valueOf(seek_dimmer.getProgress()));
+                //seek_dimmer.setProgress(PLC_Conn.ReadInt(DIMMER));
+                PLC_Conn.WriteInt(DIMMER,seek_dimmer.getProgress());
             }
         });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Connecting...", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                final SharedPreferences ConnectionSettings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                final String host_address = ConnectionSettings.getString("host_address", null);
-                final int rack_number = Integer.parseInt(ConnectionSettings.getString("rack_number", "0"));
-                final int slot_number = Integer.parseInt(ConnectionSettings.getString("slot_number", "2"));
 
+                if (PLC_Conn.isConnected == false) {
 
+                    Snackbar.make(view, "Connecting...", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
-                PLC_Conn.Connect(host_address, rack_number, slot_number);
-                if (PLC_Conn.Status < 0) {
-                    String Test = Integer.toString(PLC_Conn.Status);
-                    editTextDebug.setText(Test, TextView.BufferType.EDITABLE);
-                }else if(PLC_Conn.Status == 0){
-                    Snackbar.make(view, "Connection successful! "+ String.valueOf(PLC_Conn.isConnected), Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    editTextDebug.setText("", TextView.BufferType.EDITABLE);
-                }else{
-                    editTextDebug.setText(S7Client.ErrorText(PLC_Conn.Status)+", "+PLC_Conn.Host, TextView.BufferType.EDITABLE);
+                    final SharedPreferences ConnectionSettings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                    final String host_address = ConnectionSettings.getString("host_address", null);
+                    final int rack_number = Integer.parseInt(ConnectionSettings.getString("rack_number", "0"));
+                    final int slot_number = Integer.parseInt(ConnectionSettings.getString("slot_number", "2"));
+
+                    PLC_Conn.Connect(host_address, rack_number, slot_number);
+
+                    if (PLC_Conn.Status < 0) {
+                        Snackbar.make(view, "System error!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    }
+                    else if (PLC_Conn.Status == 0) {
+                        Snackbar.make(view, "Connection successful!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    }
+                    else {
+                        Snackbar.make(view, "Connection failed! (e"+PLC_Conn.Status+")", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    }
+                }
+                else {
+                    //editTextDebug.setText("Disconnecting");
+                    PLC_Conn.Disconnect();
+                    if (PLC_Conn.Status == 0) {
+                        Snackbar.make(view, "Disconnected!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    }
                 }
             }
-
         });
 
 
@@ -263,10 +279,36 @@ public class MainActivity extends AppCompatActivity {
                     if(PLC_Conn.Status == 0) {
                         toggle_bathroom1.setChecked(state);
                     }
+
+                    seek_dimmer.setProgress(PLC_Conn.ReadInt(DIMMER));
+                    TextView_Dimmer.setText(String.valueOf(seek_dimmer.getProgress()));
+
+                    fab.setImageResource(R.drawable.ic_connect);
+                    fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ff3399")));
+                    toggle_hall1.setEnabled(true);
+                    toggle_kitchen1.setEnabled(true);
+                    toggle_kidsroom1.setEnabled(true);
+                    toggle_guestroom1.setEnabled(true);
+                    toggle_bedroom1.setEnabled(true);
+                    toggle_wc1.setEnabled(true);
+                    toggle_bathroom1.setEnabled(true);
+                    seek_dimmer.setEnabled(true);
+                }
+                else{
+                    fab.setImageResource(R.drawable.ic_disconnect);
+                    fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00ff99")));
+                    toggle_hall1.setEnabled(false);
+                    toggle_kitchen1.setEnabled(false);
+                    toggle_kidsroom1.setEnabled(false);
+                    toggle_guestroom1.setEnabled(false);
+                    toggle_bedroom1.setEnabled(false);
+                    toggle_wc1.setEnabled(false);
+                    toggle_bathroom1.setEnabled(false);
+                    seek_dimmer.setEnabled(false);
                 }
             }
         };
-        CyclicUpdate updater = new CyclicUpdate(uiUpdater, 3000);
+        CyclicUpdate updater = new CyclicUpdate(uiUpdater, 500);
         //CyclicUpdate(uiUpdater);
 
         updater.startUpdates();

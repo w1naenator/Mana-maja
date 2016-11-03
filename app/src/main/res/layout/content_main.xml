@@ -12,7 +12,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
-
     <TextView
         android:text="@string/text_hall"
         android:layout_width="wrap_content"
@@ -32,7 +31,8 @@
         android:id="@+id/toggle_kidsroom1"
         android:layout_below="@+id/toggle_kitchen1"
         android:layout_alignLeft="@+id/toggle_kitchen1"
-        android:layout_alignStart="@+id/toggle_kitchen1" />
+        android:layout_alignStart="@+id/toggle_kitchen1"
+        android:enabled="false" />
 
     <ToggleButton
         android:text="ToggleButton"
@@ -41,7 +41,8 @@
         android:id="@+id/toggle_hall1"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:enabled="false" />
 
     <ToggleButton
         android:text="ToggleButton"
@@ -50,7 +51,8 @@
         android:id="@+id/toggle_kitchen1"
         android:layout_below="@+id/toggle_hall1"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:enabled="false" />
 
     <TextView
         android:text="@string/Kitchen"
@@ -83,7 +85,8 @@
         android:id="@+id/toggle_guestroom1"
         android:layout_below="@+id/toggle_kidsroom1"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:enabled="false" />
 
     <ToggleButton
         android:text="ToggleButton"
@@ -92,7 +95,8 @@
         android:id="@+id/toggle_bedroom1"
         android:layout_below="@+id/toggle_guestroom1"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:enabled="false" />
 
     <ToggleButton
         android:text="ToggleButton"
@@ -101,18 +105,8 @@
         android:id="@+id/toggle_bathroom1"
         android:layout_below="@+id/toggle_wc1"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/seek_dimmer"
-        android:layout_below="@+id/toggle_bathroom1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:max="100" />
+        android:enabled="false" />
 
     <TextView
         android:text="Kids room"
@@ -145,7 +139,8 @@
         android:id="@+id/toggle_wc1"
         android:layout_below="@+id/toggle_bedroom1"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:enabled="false" />
 
     <TextView
         android:text="WC"
@@ -171,17 +166,25 @@
         android:layout_toStartOf="@+id/toggle_guestroom1"
         android:layout_above="@+id/toggle_wc1" />
 
-    <EditText
+    <SeekBar
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seek_dimmer"
+        android:max="100"
+        android:enabled="false"
+        android:layout_below="@+id/toggle_bathroom1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/TextView_Dimmer"
+        android:layout_toLeftOf="@+id/TextView_Dimmer" />
+
+    <TextView
+        android:layout_width="80px"
         android:layout_height="wrap_content"
         android:text=""
         android:ems="10"
-        android:id="@+id/editTextDebug"
-        android:hint="Debug console"
-        android:layout_below="@+id/seek_dimmer"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:id="@+id/TextView_Dimmer"
+        android:layout_alignBottom="@+id/seek_dimmer"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-
 </RelativeLayout>

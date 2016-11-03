@@ -6,14 +6,17 @@ import Moka7.S7Client;
 public class PlcConnection {
     private S7Client Client;
     private Runnable ConnectRunnable;
+    private Runnable DisconnectRunnable;
+    private Runnable ReadIntRunnable;
     private Runnable ReadRunnable;
     private Runnable WriteRunnable;
+    private Runnable WriteIntRunnable;
     public boolean read = false;
     public boolean write = false;
     public boolean isConnected = false;
     public int Status = 0;
     public String Host;
-    public byte[] buffer;
+    public byte[] buffer = new byte[2];
     public String host = "evil.id.lv";
     public  int rack = 0;
     public int slot = 2;
@@ -41,20 +44,47 @@ public class PlcConnection {
                 }
             }
         };
+
+        DisconnectRunnable = new Runnable() {
+            @Override
+            public void run() {
+                Status = 0;
+                try {
+                    Client.Disconnect();
+
+                }
+                catch (NumberFormatException e) {
+                    Status = -1;
+                }
+                if (Status == 0){
+                    isConnected = false;
+                }
+            }
+        };
     //}
 
     //public PlcConnection() {
         ReadRunnable = new Runnable() {
             @Override
             public void run() {
-
                 try {
 
-                    buffer = new byte[1];
                     Status = Client.ReadArea(S7.S7AreaDB,1,db_offset,1,buffer);
+                }
+                catch (NumberFormatException e) {
+                    Status = -1;
+                }
+            }
+        };
 
+        ReadIntRunnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
 
-                } catch (NumberFormatException e) {
+                    Status = Client.ReadArea(S7.S7AreaDB,1,db_offset,2,buffer);
+                }
+                catch (NumberFormatException e) {
                     Status = -1;
                 }
             }
@@ -63,14 +93,22 @@ public class PlcConnection {
         WriteRunnable = new Runnable() {
             @Override
             public void run() {
-
                 try {
-
-
                     Status = Client.WriteArea(S7.S7AreaDB,1,db_offset,1,buffer);
+                }
+                catch (NumberFormatException e) {
+                    Status = -1;
+                }
+            }
+        };
 
-
-                } catch (NumberFormatException e) {
+        WriteIntRunnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Status = Client.WriteArea(S7.S7AreaDB,1,db_offset,2,buffer);
+                }
+                catch (NumberFormatException e) {
                     Status = -1;
                 }
             }
@@ -83,8 +121,12 @@ public class PlcConnection {
         slot = new_slot;
         slot = new_slot;
         ConnectRunnable.run();
-
     }
+
+    public synchronized void Disconnect() {
+        DisconnectRunnable.run();
+    }
+
     public synchronized Boolean Read(final int Offset) {
         db_offset = Offset;
         ReadRunnable.run();
@@ -95,6 +137,13 @@ public class PlcConnection {
         }
     }
 
+    public synchronized int ReadInt(final int Offset) {
+        db_offset = Offset;
+        ReadIntRunnable.run();
+        return (int) S7.GetWordAt(buffer, 0);
+
+    }
+
     public synchronized void Write(final int Offset, final boolean sw_state) {
         db_offset = Offset;
         if (sw_state == true){
@@ -103,5 +152,11 @@ public class PlcConnection {
             buffer[0] = 0;
         }
         WriteRunnable.run();
+    }
+
+    public synchronized void WriteInt(final int Offset, final int value) {
+        db_offset = Offset;
+        S7.SetWordAt(buffer,0,value);
+        WriteIntRunnable.run();
     }
 }
