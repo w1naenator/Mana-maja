@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,26 @@ public class PreferenceWithHeaders extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+        LinearLayout root = (LinearLayout)findViewById(android.R.id.list).getParent().getParent().getParent();
+        Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.prefs_toolbar, root, false);
+        root.addView(bar, 0); // insert at top
+        bar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+
+
+
+
+
+
 
         final View view = findViewById(android.R.id.content);
         //Snackbar.make(view, "Preference is changed!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -69,11 +92,11 @@ public class PreferenceWithHeaders extends PreferenceActivity {
 
 
     @Override
-    public void onBuildHeaders(List<Header> target)
+    public void onBuildHeaders(List<PreferenceActivity.Header> target)
     {
         loadHeadersFromResource(R.xml.preference_headers,target);
         fragments.clear();
-        for (Header header : target) {
+        for (PreferenceActivity.Header header : target) {
             fragments.add(header.fragment);
         }
     }

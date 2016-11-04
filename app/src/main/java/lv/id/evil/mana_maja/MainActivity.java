@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
         {
@@ -41,12 +45,9 @@ public class MainActivity extends AppCompatActivity {
         final boolean useTSAP = false;
         final PlcConnection PLC_Conn = new PlcConnection();
 
-        //final ProgressBar wait_cursor = (ProgressBar) findViewById(R.id.wait_cursor);
-        //wait_cursor.setVisibility(View.INVISIBLE);
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        //final int i = 0;
+
+
         final int dimmer;
         final ToggleButton toggle_hall1 = (ToggleButton) findViewById(R.id.toggle_hall1);
         final ToggleButton toggle_kitchen1 = (ToggleButton) findViewById(R.id.toggle_kitchen1);
