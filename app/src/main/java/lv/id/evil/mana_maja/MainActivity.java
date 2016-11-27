@@ -1,14 +1,19 @@
 package lv.id.evil.mana_maja;
 
+import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -20,6 +25,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import java.util.Locale;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final SharedPreferences appPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        final String language = appPreferences.getString("app_language", "sys");
+        if (language.equals("sys")){
+            setLocale(getCurrentLocale().toString());
+        }else{
+            setLocale(language);
+        }
+
         setContentView(R.layout.activity_main);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -79,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         toggle_hall1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (PLC_Conn.isConnected){
+                if (PLC_Conn.isConnected()){
                     PLC_Conn.Write(HALL1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
@@ -94,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         toggle_kitchen1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (PLC_Conn.isConnected){
+                if (PLC_Conn.isConnected()){
                     PLC_Conn.Write(KITCHEN1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
@@ -110,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
         toggle_kidsroom1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (PLC_Conn.isConnected){
+                if (PLC_Conn.isConnected()){
                     PLC_Conn.Write(KIDSROOM1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
@@ -126,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
         toggle_guestroom1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (PLC_Conn.isConnected){
+                if (PLC_Conn.isConnected()){
                     PLC_Conn.Write(GUESTROOM1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
@@ -141,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
         toggle_bedroom1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (PLC_Conn.isConnected){
+                if (PLC_Conn.isConnected()){
                     PLC_Conn.Write(BEDROOM1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
@@ -156,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
         toggle_wc1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (PLC_Conn.isConnected){
+                if (PLC_Conn.isConnected()){
                     PLC_Conn.Write(WC1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
@@ -171,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
         toggle_bathroom1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (PLC_Conn.isConnected){
+                if (PLC_Conn.isConnected()){
                     PLC_Conn.Write(BATHROOM1, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
@@ -201,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                 // TODO Auto-generated method stub
-                TextView_Dimmer.setText(String.valueOf(seek_dimmer.getProgress()));
+                TextView_Dimmer.setText(String.valueOf(seek_dimmer.getProgress())+"%");
                 //seek_dimmer.setProgress(PLC_Conn.ReadInt(DIMMER));
                 PLC_Conn.WriteInt(DIMMER,seek_dimmer.getProgress());
             }
@@ -211,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (PLC_Conn.isConnected == false) {
+                if (PLC_Conn.isConnected() == false) {
 
                     Snackbar.make(view, R.string.fab_connecting, Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
@@ -251,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean state = false;
                 i++;
                 //editTextDebug.setText(String.valueOf(i) + ", isConnected = " + String.valueOf(PLC_Conn.isConnected), TextView.BufferType.EDITABLE);
-                if(PLC_Conn.isConnected == true) {
+                if(PLC_Conn.isConnected()) {
                     state = PLC_Conn.Read(HALL1);
                     if(PLC_Conn.Status == 0) {
                         toggle_hall1.setChecked(state);
@@ -282,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     seek_dimmer.setProgress(PLC_Conn.ReadInt(DIMMER));
-                    TextView_Dimmer.setText(String.valueOf(seek_dimmer.getProgress()));
+                    TextView_Dimmer.setText(String.valueOf(seek_dimmer.getProgress())+"%");
 
                     fab.setImageResource(R.drawable.ic_action_disconnect);
                     fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ff3399")));
@@ -325,7 +341,19 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit confirmation")
+                .setMessage("Do you really want to kill app?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        System.exit(0);
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
+    }
 
 
 
@@ -345,18 +373,48 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_exit) {
-            System.exit(0);
+            new AlertDialog.Builder(this)
+                    .setTitle("Exit confirmation")
+                    .setMessage("Do you really want to kill app?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            System.exit(0);
+                        }})
+                    .setNegativeButton(android.R.string.no, null).show();
             return true;
         }
 
         if (id == R.id.action_settings) {
-            Intent LaunchSettings = new Intent(MainActivity.this, PreferenceWithHeaders.class);
+            //Intent LaunchSettings = new Intent(MainActivity.this, PreferenceWithHeaders.class);
+            Intent LaunchSettings = new Intent(MainActivity.this, PrefsActivity.class);
             MainActivity.this.startActivity(LaunchSettings);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    public Locale getCurrentLocale(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            return getResources().getConfiguration().getLocales().get(0);
+        } else{
+            //noinspection deprecation
+            return getResources().getConfiguration().locale;
+        }
+    }
+
+    public void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+    }
+
+
 
 
 }

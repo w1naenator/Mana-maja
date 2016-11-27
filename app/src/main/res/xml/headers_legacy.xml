@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <PreferenceScreen
+      xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:icon="@drawable/ic_action_connection_settings"
+        android:title="@string/connection_settings">
+      <intent
+          android:action="@string/connection_settings"
+          android:targetClass="lv.id.evil.mana_maja.PrefsActivity"
+          android:targetPackage="lv.id.evil.mana_maja" />
+    </Preference>
+    <Preference
+        android:icon="@drawable/ic_action_connection_settings"
+        android:title="@string/advanced_settings">
+      <intent
+          android:action="@string/advanced_settings"
+          android:targetClass="lv.id.evil.mana_maja.PrefsActivity"
+          android:targetPackage="lv.id.evil.mana_maja" />
+    </Preference>
+    <Preference
+        android:icon="@drawable/ic_action_www"
+        android:title="@string/devs_homepage"
+        android:summary="www.evil.id.lv">
+      <intent android:action="android.intent.action.VIEW"
+          android:data="http://www.evil.id.lv" />
+    </Preference>
+  </PreferenceScreen>

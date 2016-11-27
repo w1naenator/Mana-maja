@@ -13,7 +13,6 @@ public class PlcConnection {
     private Runnable WriteIntRunnable;
     public boolean read = false;
     public boolean write = false;
-    public boolean isConnected = false;
     public int Status = 0;
     public String Host;
     public byte[] buffer = new byte[2];
@@ -36,12 +35,6 @@ public class PlcConnection {
                 } catch (NumberFormatException e) {
                     Status = -1;
                 }
-                if (Status == 0){
-                    isConnected = true;
-                }
-                else{
-                    isConnected = false;
-                }
             }
         };
 
@@ -55,9 +48,6 @@ public class PlcConnection {
                 }
                 catch (NumberFormatException e) {
                     Status = -1;
-                }
-                if (Status == 0){
-                    isConnected = false;
                 }
             }
         };
@@ -115,6 +105,16 @@ public class PlcConnection {
         };
     }
 
+    public boolean isConnected(){
+        if(Client.Connected && Client.LastError == 0){
+            return true;
+        }
+        else{
+            Client.Disconnect();
+            return false;
+        }
+    }
+
     public synchronized void Connect(final String new_host, final int new_rack, final int new_slot) {
         host = new_host;
         rack = new_rack;
@@ -159,4 +159,6 @@ public class PlcConnection {
         S7.SetWordAt(buffer,0,value);
         WriteIntRunnable.run();
     }
+
+
 }

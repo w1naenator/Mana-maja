@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+    <header
+        android:icon="@drawable/ic_action_connection_settings"
+        android:title="@string/connection_settings"
+        android:fragment="lv.id.evil.mana_maja.PrefsFragment" >
+      <extra
+          android:name="category"
+          android:value="@string/connection_settings" />
+    </header>
+    <header
+        android:icon="@drawable/ic_action_connection_settings"
+        android:title="@string/advanced_settings"
+        android:fragment="lv.id.evil.mana_maja.PrefsFragment" >
+      <extra
+          android:name="category"
+          android:value="@string/advanced_settings" />
+    </header>
+    <header
+        android:icon="@drawable/ic_action_www"
+        android:title="@string/devs_homepage"
+        android:summary="www.evil.id.lv">
+      <intent android:action="android.intent.action.VIEW"
+          android:data="http://www.evil.id.lv" />
+    </header>
+  </preference-headers>

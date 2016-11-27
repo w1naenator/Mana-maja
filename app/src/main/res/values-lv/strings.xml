@@ -33,7 +33,7 @@
     <string name="host_address_title">Hosts vai IP adrese</string>
     <string name="rack_number_summary">Norādiet sliedes numuru</string>
     <string name="rack_number_title">Sliedes numurs</string>
-    <string name="settings_label">Siestatījumi</string>
+    <string name="settings_label">Iestatījumi</string>
     <string name="slot_number_summary">Norādiet ligzdas numuru</string>
     <string name="slot_number_title">Ligzdas numurs</string>
     <string name="text_host_or_ip">Hosts vai IP</string>
@@ -42,4 +42,11 @@
     <string name="kids_room">Bērnu istaba</string>
     <string name="text_bedroom">Guļamistaba</string>
     <string name="bath_room">Vannas istaba</string>
+    <string name="header_general">Galvenie</string>
+    <string name="header_advanced">Paplašinātie</string>
+    <string name="category_general">category_general</string>
+    <string name="category_advanced">category_advanced</string>
+    <string name="advanced_settings">Paplašinātie iestatījumi</string>
+    <string name="Off">Atsl.</string>
+    <string name="On">Iesl.</string>
 </resources>
