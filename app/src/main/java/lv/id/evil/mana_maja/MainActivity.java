@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                   KITCHEN1 = 820,
                   KIDSROOM1 = 844,
                   GUESTROOM1 = 850,
-                  BEDROOM1 = 950,
+                  BEDROOM1 = 814,
                   WC1 = 838,
                   BATHROOM1 = 826,
                   DIMMER = 944;
