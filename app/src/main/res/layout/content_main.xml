@@ -16,7 +16,10 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".MainActivity"
-        tools:showIn="@layout/activity_main">
+        tools:showIn="@layout/activity_main"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/toggle_hall1"
+        android:layout_toStartOf="@+id/toggle_hall1">
 
 
         <View
@@ -101,12 +104,12 @@
             android:layout_alignParentEnd="true" />
 
         <ToggleButton
-            android:textOff="@string/Off"
-            android:textOn="@string/On"
+            android:textOff="@string/light_off"
+            android:textOn="@string/light_on"
             android:text="ToggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/toggle_wc1"
+            android:id="@+id/toggle_wc_light"
             android:enabled="false"
             android:layout_below="@+id/toggle_bedroom1"
             android:layout_alignParentRight="true"
@@ -120,7 +123,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/toggle_bathroom1"
             android:enabled="false"
-            android:layout_below="@+id/toggle_wc1"
+            android:layout_below="@+id/toggle_wc_ventilation"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -179,7 +182,7 @@
             android:layout_alignParentStart="true"
             android:layout_toLeftOf="@+id/toggle_guestroom1"
             android:layout_toStartOf="@+id/toggle_guestroom1"
-            android:layout_above="@+id/toggle_wc1"
+            android:layout_above="@+id/toggle_wc_ventilation"
             android:textSize="20sp"
             android:gravity="center"
             android:textAlignment="viewStart" />
@@ -200,21 +203,6 @@
             android:textAlignment="viewStart" />
 
         <TextView
-            android:text="@string/text_wc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_WC"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/text_bedroom"
-            android:layout_toLeftOf="@+id/toggle_bedroom1"
-            android:layout_toStartOf="@+id/toggle_bedroom1"
-            android:layout_above="@+id/toggle_bathroom1"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textAlignment="viewStart" />
-
-        <TextView
             android:text="@string/bath_room"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -223,8 +211,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignBottom="@+id/toggle_bathroom1"
             android:layout_below="@+id/text_WC"
-            android:layout_toLeftOf="@+id/toggle_wc1"
-            android:layout_toStartOf="@+id/toggle_wc1"
+            android:layout_toLeftOf="@+id/toggle_wc_ventilation"
+            android:layout_toStartOf="@+id/toggle_wc_ventilation"
             android:textSize="20sp"
             android:gravity="center"
             android:textAlignment="viewStart" />
@@ -238,5 +226,33 @@
             android:layout_below="@+id/toggle_bathroom1"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:text="@string/text_wc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_WC"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textAlignment="viewStart"
+            android:layout_below="@+id/toggle_bedroom1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/toggle_wc_ventilation"
+            android:layout_toStartOf="@+id/toggle_wc_ventilation"
+            android:layout_alignBottom="@+id/toggle_wc_ventilation" />
+
+        <ToggleButton
+            android:textOff="@string/ventilation"
+            android:textOn="@string/ventilation"
+            android:text="ToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggle_wc_ventilation"
+            android:enabled="false"
+            android:layout_alignBaseline="@+id/toggle_wc_light"
+            android:layout_alignBottom="@+id/toggle_wc_light"
+            android:layout_toLeftOf="@+id/toggle_wc_light"
+            android:layout_toStartOf="@+id/toggle_wc_light" />
     </RelativeLayout>
     </ScrollView>

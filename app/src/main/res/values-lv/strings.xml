@@ -49,4 +49,9 @@
     <string name="advanced_settings">Paplašinātie iestatījumi</string>
     <string name="Off">Atsl.</string>
     <string name="On">Iesl.</string>
+    <string name="light_off">Gaisma</string>
+    <string name="light_on">Gaisma</string>
+    <string name="ventilation">Vent.</string>
+    <string name="fab_wc_ventilation_is_switched_on">Tualetes ventilācija ir ieslēgta</string>
+    <string name="fab_wc_ventilation_is_switched_off">Tualetes ventilācija ir atslēgta</string>
 </resources>

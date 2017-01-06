@@ -123,4 +123,9 @@
     <string name="devs_homepage">Developer\'s homepage</string>
     <string name="Off">Off</string>
     <string name="On">On</string>
+    <string name="light_on">Light On</string>
+    <string name="light_off">Light Off</string>
+    <string name="ventilation">Vent.</string>
+    <string name="fab_wc_ventilation_is_switched_on">WC ventillation is switched on</string>
+    <string name="fab_wc_ventilation_is_switched_off">WC ventillation is switched off</string>
 </resources>

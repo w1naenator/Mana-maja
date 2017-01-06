@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
         final ToggleButton toggle_kidsroom1 = (ToggleButton) findViewById(R.id.toggle_kidsroom1);
         final ToggleButton toggle_guestroom1 = (ToggleButton) findViewById(R.id.toggle_guestroom1);
         final ToggleButton toggle_bedroom1 = (ToggleButton) findViewById(R.id.toggle_bedroom1);
-        final ToggleButton toggle_wc1 = (ToggleButton) findViewById(R.id.toggle_wc1);
+        final ToggleButton toggle_wc_light = (ToggleButton) findViewById(R.id.toggle_wc_light);
+        final ToggleButton toggle_wc_ventilation = (ToggleButton) findViewById(R.id.toggle_wc_ventilation);
         final ToggleButton toggle_bathroom1 = (ToggleButton) findViewById(R.id.toggle_bathroom1);
         final SeekBar seek_dimmer=(SeekBar) findViewById(R.id.seek_dimmer);
         final SharedPreferences ConnectionSettings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -86,9 +87,10 @@ public class MainActivity extends AppCompatActivity {
                   KIDSROOM1 = 844,
                   GUESTROOM1 = 850,
                   BEDROOM1 = 814,
-                  WC1 = 838,
+                  WC_LIGHT = 838,
                   BATHROOM1 = 826,
-                  DIMMER = 944;
+                  DIMMER = 944,
+                  WC_VENTILLATION = 926;
 
         //PLC_Conn.Connect(host_address, rack_number, slot_number);
 //================================listeners==========================
@@ -170,10 +172,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        toggle_wc1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        toggle_wc_light.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (PLC_Conn.isConnected()){
-                    PLC_Conn.Write(WC1, isChecked);
+                    PLC_Conn.Write(WC_LIGHT, isChecked);
                     if (PLC_Conn.Status == 0){
                         if (isChecked) {
                             Snackbar.make(buttonView, R.string.fab_wc_light_is_switched_on, Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -194,6 +196,21 @@ public class MainActivity extends AppCompatActivity {
                             Snackbar.make(buttonView, R.string.fab_bathroom_light_is_switched_on, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         } else {
                             Snackbar.make(buttonView, R.string.fab_bathroom_light_is_switched_off, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        }
+                    }
+                }
+            }
+        });
+
+        toggle_wc_ventilation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (PLC_Conn.isConnected()){
+                    PLC_Conn.Write(WC_VENTILLATION, isChecked);
+                    if (PLC_Conn.Status == 0){
+                        if (isChecked) {
+                            Snackbar.make(buttonView, R.string.fab_wc_ventilation_is_switched_on, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        } else {
+                            Snackbar.make(buttonView, R.string.fab_wc_ventilation_is_switched_off, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         }
                     }
                 }
@@ -288,9 +305,9 @@ public class MainActivity extends AppCompatActivity {
                     if(PLC_Conn.Status == 0) {
                         toggle_bedroom1.setChecked(state);
                     }
-                    state = PLC_Conn.Read(WC1);
+                    state = PLC_Conn.Read(WC_LIGHT);
                     if(PLC_Conn.Status == 0) {
-                        toggle_wc1.setChecked(state);
+                        toggle_wc_light.setChecked(state);
                     }
                     state = PLC_Conn.Read(BATHROOM1);
                     if(PLC_Conn.Status == 0) {
@@ -307,8 +324,9 @@ public class MainActivity extends AppCompatActivity {
                     toggle_kidsroom1.setEnabled(true);
                     toggle_guestroom1.setEnabled(true);
                     toggle_bedroom1.setEnabled(true);
-                    toggle_wc1.setEnabled(true);
+                    toggle_wc_light.setEnabled(true);
                     toggle_bathroom1.setEnabled(true);
+                    toggle_wc_ventilation.setEnabled(true);
                     seek_dimmer.setEnabled(true);
                 }
                 else{
@@ -319,8 +337,9 @@ public class MainActivity extends AppCompatActivity {
                     toggle_kidsroom1.setEnabled(false);
                     toggle_guestroom1.setEnabled(false);
                     toggle_bedroom1.setEnabled(false);
-                    toggle_wc1.setEnabled(false);
+                    toggle_wc_light.setEnabled(false);
                     toggle_bathroom1.setEnabled(false);
+                    toggle_wc_ventilation.setEnabled(false);
                     seek_dimmer.setEnabled(false);
                 }
             }
